@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import {toast} from "react-hot-toast"
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
   const router = useRouter();
@@ -12,39 +12,41 @@ const SignUp = () => {
     email: "",
     password: "",
   });
-  const [buttonDisable, setButtonDisable] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [buttonDisable, setButtonDisable] = useState(false);
+  const [loading, setLoading] = useState(false);
   const onSingup = async () => {
-    try{
+    try {
       setLoading(true);
 
-      const respose = await axios.post("/api/users/signup", user)
-      
-      if (respose?.data?.success) {
-        toast.success(`${user.username} created successfully`)
-        console.log(respose?.data)
-        router.push("/login")
-      }
+      const respose = await axios.post("/api/users/signup", user);
 
-    }catch(error: any){
+      if (respose?.data?.success) {
+        toast.success(`${user.username} created successfully`);
+        console.log(respose?.data);
+        router.push("/login");
+      }
+    } catch (error: any) {
       console.log(error);
-      toast.error(error?.message)
-    } finally{
-      setLoading(false)
+      toast.error(error?.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  useEffect(()=> {
-    if(user.email && user.username && user.password) {
-      setButtonDisable(true)
+  useEffect(() => {
+    if (user.email && user.username && user.password) {
+      setButtonDisable(true);
     }
-  },[user])
+  }, [user]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1>{!loading? "Signup": "Processing"}</h1>
-      <hr />
-      <label htmlFor="username">User Name</label>
+      <h1 className="text-2xl font-medium">
+        {!loading ? "Signup" : "Processing"}
+      </h1>
+      <label className="mt-2" htmlFor="username">
+        User Name
+      </label>
       <input
         className="p-2 border border-gray-300 rounded-lg md-4 focus:outline-none focus:border-red-600"
         id="username"
@@ -73,10 +75,15 @@ const SignUp = () => {
         onChange={(e) => setUser({ ...user, password: e.target.value })}
         placeholder="Password"
       />
-      <button className="bg-gray-700 p-2 rounded-lg mt-2" onClick={onSingup}>
-        {buttonDisable? "Singup" : "No Singup"}
+      <button
+        className="p-2 mt-2 rounded-lg bg-green-400 hover:bg-green-600"
+        onClick={onSingup}
+      >
+        {buttonDisable ? "Singup" : "No Singup"}
       </button>
-      <Link className="mt-2 text-blue-700" href="/login">Visit Login page</Link>
+      <Link className="mt-2 text-blue-700" href="/login">
+        Visit Login page
+      </Link>
     </div>
   );
 };
