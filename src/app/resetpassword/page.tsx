@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-export default function page() {
+export default function ResetPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [token, setToken] = useState("");
