@@ -38,7 +38,11 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         emailType === "VERIFY" ? "verifyemail" : "resetpassword"
       }?token=${hashedToken}">here</a> to ${
         emailType === "VERIFY" ? "Verify your email" : "Reset your password"
-      } Or copy this token: "${hashedToken}"</p>`,
+      } Or if the link don't work copy this url and paste in search: ${
+        process.env.DOMAIN
+      }/${
+        emailType === "VERIFY" ? "verifyemail" : "resetpassword"
+      }?token=${hashedToken}</p>`,
     };
 
     //sending mail
