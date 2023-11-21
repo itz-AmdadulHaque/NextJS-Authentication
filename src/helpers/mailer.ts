@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
 
+//i use amt email to log in mailtrap
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     //create a hashed token. make sure the userId is a string

@@ -10,7 +10,9 @@ export async function GET() {
     // delete the token
     // cookies.delete("token") wont work on versel due to
     // preventing cross-site-request-forgery
-    response.cookies.set("token", "");
+    response.cookies.set("token", "", {
+      httpOnly: true,
+    });
     return response;
   } catch (error: any) {
     return NextResponse.json({ error: error?.message }, { status: 500 });
