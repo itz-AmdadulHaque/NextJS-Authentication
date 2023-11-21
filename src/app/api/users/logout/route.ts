@@ -12,6 +12,7 @@ export async function GET() {
     // preventing cross-site-request-forgery
     response.cookies.set("token", "", {
       httpOnly: true,
+      maxAge: 0, //immidiately expire and delete the token
     });
     return response;
   } catch (error: any) {

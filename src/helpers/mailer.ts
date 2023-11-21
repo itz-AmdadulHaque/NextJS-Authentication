@@ -6,7 +6,26 @@ import bcryptjs from "bcryptjs";
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     //create a hashed token. make sure the userId is a string
-    const hashedToken = await bcryptjs.hash(userId.toString(), 10);
+    // const hashedToken = await bcryptjs.hash(userId.toString(), 10);
+    // bcrypt hash token can contain special character
+    // search engines will generally change special characters in URLs
+    // so we cannot bcrypt token to send as query
+
+    // creating my own random number to add to userid making encryption my way(not safe)
+    const min = 1;
+    const max = 1000;
+    const randomNumber1 = (
+      Math.floor(Math.random() * (max - min + 1)) + min
+    ).toString();
+    const randomNumber2 = (
+      Math.floor(Math.random() * (max - min + 1)) + min
+    ).toString();
+    const randomNumber3 = (
+      Math.floor(Math.random() * (max - min + 1)) + min
+    ).toString();
+
+    const hashedToken =
+      randomNumber1 + randomNumber2 + userId.toString() + randomNumber3;
 
     if (emailType === "VERIFY") {
       await User.findByIdAndUpdate(userId, {
