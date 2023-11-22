@@ -41,8 +41,8 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
 
     // find this code in mailtrap, nodemailer option
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: process.env.MAIL_TRAP_HOST!,
+      port: parseInt(process.env.MAIL_TRAP_PORT!),
       auth: {
         user: process.env.MAIL_TRAP_USER!,
         pass: process.env.MAIL_TRAP_PASS!,
