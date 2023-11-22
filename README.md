@@ -1,4 +1,10 @@
-# NextJS Auhtentication
+# NextJS Auhtentication [(Click to visit)](https://next-js-authentication-mauve.vercel.app/)
+
+🔐 Hey there! This is my Next.js project where I'm learning about authentication. I'm using bcryptjs to keep things secure, and jsonwebtoken to hide and store the secret stuff. For testing emails, I'm using Mailtrap. But heads up, only I can see those test emails. If you're curious and want to play around, feel free to use the guest account:
+- Email: guest@gmail.com
+- Password: 1234
+
+Enjoy exploring! 😊
 
 ### npm packages
 
