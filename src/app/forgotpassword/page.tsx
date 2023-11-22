@@ -1,8 +1,10 @@
 "use client"
 import axios from "axios";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function ForgotPassword() {
+  const [buttonDisable, setButtonDisable] = useState(false)
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
@@ -12,6 +14,7 @@ export default function ForgotPassword() {
       console.log(response?.data)
       if(response?.data?.success){
         setMessage("An email sent to you to rest your password")
+        setButtonDisable(true)
       }
     }catch(error:any){
       console.log(error)
@@ -31,7 +34,9 @@ export default function ForgotPassword() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your Email"
       />
-      <button className="rounded-lg bg-green-400 p-2 mt-2 hover:bg-green-600" onClick={submitEmail}>Submit</button>
+      <button className="rounded-lg bg-green-400 p-2 mt-2 hover:bg-green-600" onClick={submitEmail} 
+      disabled= {buttonDisable}>Submit</button>
+      {buttonDisable && <Link href={"/login"}>Go to Login Page</Link>}
     </div>
   );
 }
