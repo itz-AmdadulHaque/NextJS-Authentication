@@ -11,7 +11,14 @@ export default function ProfilePage() {
   const [id, setId] = useState("");
   const onLogout = async () => {
     try {
-      const response = await axios.get("/api/users/logout");
+      //after hosting in vercel if we don't set to no-cache then 
+      //the logout won't work for second time due to cache response
+      const response = await axios.get("/api/users/logout", {
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
+
       if (response?.data?.success) {
         console.log("logout Successful");
         toast.success("logout successful");
